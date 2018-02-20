@@ -20,13 +20,7 @@ public class FlyMethod extends JLabel implements MouseListener
 		sleepvalue=100;
 		jump=20;
 	}
-	public synchronized void reverse_bird_taken()
-	{
-		if(forwardbirdtaken) forwardbirdtaken=false;
-		else forwardbirdtaken=true;
-		if(backwardbirdtaken) backwardbirdtaken=false;
-		else backwardbirdtaken=true;
-	}
+	
 	public synchronized void reverse_inframe_status()
 	{
 		if(inframe) 
@@ -59,14 +53,20 @@ public class FlyMethod extends JLabel implements MouseListener
 	public void takeforwardbird()
 	{
 		//System.out.println("thread : "+Thread.currentThread().getId()+" is taking forward bird");
-		reverse_bird_taken();
+		//reverse_bird_taken();
+		forwardbirdtaken=true;
+		backwardbirdtaken=false;
+		
 		recentbird1=bf1;
 		recentbird2=bf2;
 	}
 	public void takebackwardbird()
 	{
 		//System.out.println("thread : "+Thread.currentThread().getId()+" is taking backward bird");
-		reverse_bird_taken();
+		//reverse_bird_taken();
+		
+		forwardbirdtaken=false;
+		backwardbirdtaken=true;
 		recentbird1=bb1;
 		recentbird2=bb2;
 	}
@@ -171,7 +171,7 @@ public class FlyMethod extends JLabel implements MouseListener
 				//System.out.println(i+" "+j);
 				// //System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
-			catch(Exception e) { } 
+				catch(Exception e) { } 
 				
 				
 				if(birdshot) dropBird();
@@ -370,6 +370,7 @@ public class FlyMethod extends JLabel implements MouseListener
 		{
 			headshot=true;
 			reverse_birdshot_status();
+			System.out.println("it is backward bird\nhead shot in x : "+x+" y : "+y );
 			
 		}
 		else if(x>=60 && x <=110  && y>=45 && y<=130)
@@ -390,6 +391,7 @@ public class FlyMethod extends JLabel implements MouseListener
 		{
 			reverse_birdshot_status();
 			headshot=true;
+			System.out.println("it is forward bird\nhead shot in x : "+x+" y : "+y );
 		}
 		else if(x>=106 && x <=155  && y>=40 && y<=124)
 		{
@@ -402,8 +404,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public boolean is_inframe()
 	{
-		//System.out.println("id "+Thread.currentThread().getId()+" "+(parent.elapsedTime+System.nanoTime()-parent.startTime)+" "+parent.runningThread);
-		//System.out.println("thread : "+Thread.currentThread().getId()+" checking in frame");
 		if(currentPositionX<-270 || currentPositionX>gameWidith+10 || currentPositionY<-240 || currentPositionY>gameHeight+10)
 		{
 			
@@ -420,9 +420,9 @@ public class FlyMethod extends JLabel implements MouseListener
 					
 					parent.startTime=System.nanoTime();
 					parent.elapsedTime=0;
-					System.out.println("opening t2");
+					//System.out.println("opening t2");
 					parent.t2.start();
-					System.out.println("t2 is on");
+					//System.out.println("t2 is on");
 					
 					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 				}
@@ -437,9 +437,9 @@ public class FlyMethod extends JLabel implements MouseListener
 					
 					
 					parent.startTime=System.nanoTime();
-					System.out.println("opening t3");
+					//System.out.println("opening t3");
 					parent.t3.start();
-					System.out.println("t3 is on");
+					//System.out.println("t3 is on");
 					Thread.currentThread().stop();
 					
 					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
@@ -452,9 +452,9 @@ public class FlyMethod extends JLabel implements MouseListener
 					parent.runningThread++;
 					parent.startTime=System.nanoTime();
 					parent.elapsedTime=0;
-					System.out.println("opening t4");
+					//System.out.println("opening t4");
 					parent.t4.start();
-					System.out.println("t4 is on");
+					//System.out.println("t4 is on");
 					
 					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 				}
@@ -462,16 +462,11 @@ public class FlyMethod extends JLabel implements MouseListener
 				{
 					
 				
-					//System.out.println("bird1 time out");
-					//Thread.currentThread().running=false;
-				
 					parent.decrease_runningThread();
 				
 					if(parent.runningThread==0)
 					{
-						//System.out.println("bird 1 stop");
-						//System.out.println("all thread stopped");
-				
+						
 						try{
 							Thread.sleep(1000);
 						}
