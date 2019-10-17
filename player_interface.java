@@ -51,7 +51,7 @@ public class player_interface extends JFrame implements ActionListener
 		level4.setEnabled(false);
 		panelselect.add(level4);
 		
-		backgroundlabel=new JLabel(new ImageIcon("background.png"));
+		backgroundlabel=new JLabel(new ImageIcon("pictures/background.png"));
 		backgroundlabel.setBounds(0,0,WIDITH,HEIGHT);
 		panelselect.add(backgroundlabel);
 		
@@ -64,8 +64,7 @@ public class player_interface extends JFrame implements ActionListener
 		
 		readFile();
 		
-		System.out.println("level "+max_level);
-
+		
 		
 		if(max_level==0){}
 		else if(max_level==1) level1.setEnabled(true);
@@ -94,18 +93,18 @@ public class player_interface extends JFrame implements ActionListener
 	public void readFile()
 	{
 		try{
-		File file = new File("ScoreTable.txt");
-		FileReader reader = new FileReader(file);
-		BufferedReader bfl = new BufferedReader(reader);
-		String scor=bfl.readLine();
-		String l=bfl.readLine();
-		
-		high_score=Integer.parseInt(scor);
-		max_level=Integer.parseInt(l);
-		
-		System.out.println("initial : score : "+scor+" level : "+l);
-		  
-		reader.close();
+			File file = new File("ScoreTable.txt");
+			FileReader reader = new FileReader(file);
+			BufferedReader bfl = new BufferedReader(reader);
+			String scor=bfl.readLine();
+			String l=bfl.readLine();
+			
+			high_score=Integer.parseInt(scor);
+			max_level=Integer.parseInt(l);
+			
+			System.out.println("initial : score : "+scor+" level : "+l);
+			  
+			reader.close();
 		}
 		catch(Exception e){}
 		
@@ -132,8 +131,6 @@ public class player_interface extends JFrame implements ActionListener
 		{
 			this.setVisible(false);
 			Level l=new Level(4,scorelabel);
-		}
-		
+		}	
 	}
-
 }

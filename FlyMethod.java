@@ -8,7 +8,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	int gameWidith=1500,gameHeight=900;
 	int currentPositionX,currentPositionY;
 	Random r=new Random();
-	//long parent.birdTime=30000000000L;
 	long time,diff=4000000000L;
 	boolean inframe=false,forwardbirdtaken=false,backwardbirdtaken=false,birdshot=false,headshot=false;
 	int player_level=1;
@@ -25,12 +24,10 @@ public class FlyMethod extends JLabel implements MouseListener
 	{
 		if(inframe) 
 		{
-			//System.out.println(Thread.currentThread().getId()+"out of frame");
 			inframe=false;
 		}
 		else 
 		{
-			//System.out.println(Thread.currentThread().getId()+" is inframe");
 			inframe=true;
 			
 		}
@@ -38,22 +35,17 @@ public class FlyMethod extends JLabel implements MouseListener
 	
 	public synchronized void reverse_birdshot_status()
 	{
-		//System.out.println(Thread.currentThread().getId()+" shot");
 		if(birdshot)
 		{
-			//System.out.println(Thread.currentThread().getId()+" shot false");
 			birdshot=false;
 		}
 		else
 		{
-			//System.out.println(Thread.currentThread().getId()+" shot true");
 			birdshot=true;
 		}
 	}
 	public void takeforwardbird()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" is taking forward bird");
-		//reverse_bird_taken();
 		forwardbirdtaken=true;
 		backwardbirdtaken=false;
 		
@@ -62,8 +54,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void takebackwardbird()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" is taking backward bird");
-		//reverse_bird_taken();
 		
 		forwardbirdtaken=false;
 		backwardbirdtaken=true;
@@ -72,7 +62,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void flyForward()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly forward");
 		time=System.nanoTime();
 		takeforwardbird();
 		if(inframe)
@@ -113,9 +102,7 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void flyBackward()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly backward");
 		time=System.nanoTime();
-		//System.out.println("comes in flyBackward : "+System.nanoTime());
 		takebackwardbird();
 		if(inframe)
 		{
@@ -156,7 +143,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void flyForwardUp()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly forward Up");
 		for(int i=currentPositionX;i<gameWidith+250;)
 		{
 			for(int j=currentPositionY;j>-100;)
@@ -168,8 +154,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				}
 				setIcon(recentbird1);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
-				// //System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { } 
 				
@@ -180,7 +164,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyBackward();
-				//else flyForwardDown();
 				
 				if(!is_inframe()) 
 				{
@@ -199,9 +182,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyBackward();
-				//else flyForwardDown();
-				
-				
 				
 				
 			}
@@ -212,7 +192,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void flyForwardDown()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly forward down");
 		for(int i=currentPositionX;i<gameWidith+250;)
 		{
 			
@@ -225,7 +204,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				}
 				setIcon(recentbird1);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { System.out.println("sleep exception");}
 				
@@ -235,7 +213,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyBackward();
-				//else flyForwardUp();
 				
 				if(!is_inframe()) 
 				{
@@ -244,7 +221,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				}
 				setIcon(recentbird2);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { }
 				
@@ -254,7 +230,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyBackward();
-				//else flyForwardUp();
 			}
 			if(r.nextBoolean() && System.nanoTime()-time>diff) flyBackward();
 			else flyForwardUp();
@@ -264,7 +239,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	
 	public void flyBackwardUp()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly backward Up");
 		for(int i=currentPositionX;i>-100;)
 		{
 			for(int j=currentPositionY;j>-100;)
@@ -277,7 +251,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				
 				setIcon(recentbird1);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { System.out.println("sleep exception");}
 				
@@ -287,7 +260,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
-				//else flyBackwardDown();
 				
 				if(!is_inframe()) 
 				{
@@ -297,7 +269,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				
 				setIcon(recentbird2);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { }
 				
@@ -307,7 +278,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
-				//else flyBackwardDown();
 			}
 			if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
 			else flyBackwardDown();
@@ -315,7 +285,6 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	public void flyBackwardDown()
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" in fly backward Down");
 		for(int i=currentPositionX;i>-100;)
 		{
 			for(int j=currentPositionY;j<gameHeight+100;)
@@ -327,7 +296,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				}
 				setIcon(recentbird1);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { }
 				
@@ -337,7 +305,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
-				//else flyBackwardUp();
 				if(!is_inframe()) 
 				{
 					if(r.nextBoolean()) flyForward();
@@ -346,7 +313,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				
 				setIcon(recentbird2);
 				setBounds(i,j,200,168);
-				//System.out.println(i+" "+j);
 				try{ Thread.sleep(sleepvalue); }
 				catch(Exception e) { }
 				
@@ -356,7 +322,6 @@ public class FlyMethod extends JLabel implements MouseListener
 				currentPositionX=i;
 				currentPositionY=j;
 				if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
-				//else flyBackwardUp();
 			}
 			if(r.nextBoolean() && System.nanoTime()-time>diff) flyForward();
 			else flyBackwardUp();
@@ -364,34 +329,27 @@ public class FlyMethod extends JLabel implements MouseListener
 	}
 	void isbackwardbirdShot(int x,int y)
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" is checking shot");
 		
 		if(x>=3 && x <=67  && y>=36 && y<=105)
 		{
 			headshot=true;
-			reverse_birdshot_status();
-			System.out.println("it is backward bird\nhead shot in x : "+x+" y : "+y );
-			
+			reverse_birdshot_status();		
 		}
 		else if(x>=60 && x <=110  && y>=45 && y<=130)
 		{
 			reverse_birdshot_status();
-					
 		}
 		else if(x>=100 && x <=130  && y>=60 && y<=132)
 		{
 			reverse_birdshot_status();
-			
 		}
 	}
 	void isforwardbirdShot(int x,int y)
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" is checking");
 		if(x>=148 && x <=197  && y>=40 && y<=100)
 		{
 			reverse_birdshot_status();
 			headshot=true;
-			System.out.println("it is forward bird\nhead shot in x : "+x+" y : "+y );
 		}
 		else if(x>=106 && x <=155  && y>=40 && y<=124)
 		{
@@ -407,28 +365,21 @@ public class FlyMethod extends JLabel implements MouseListener
 		if(currentPositionX<-270 || currentPositionX>gameWidith+10 || currentPositionY<-240 || currentPositionY>gameHeight+10)
 		{
 			
-			//System.out.println("bird 1 out of frame");
 			reverse_inframe_status();
 			if((System.nanoTime()-parent.startTime+parent.elapsedTime)>=parent.birdTime)
 			{
 				if(parent.player_level==1)
 				{
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 					parent.player_level++;
 					parent.currentLevel.setText("Level "+parent.player_level);
 					parent.runningThread++;
 					
 					parent.startTime=System.nanoTime();
 					parent.elapsedTime=0;
-					//System.out.println("opening t2");
 					parent.t2.start();
-					//System.out.println("t2 is on");
-					
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 				}
 				else if(parent.player_level==2)
 				{
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 					parent.player_level++;
 					parent.currentLevel.setText("Level "+parent.player_level);
 					
@@ -437,26 +388,18 @@ public class FlyMethod extends JLabel implements MouseListener
 					
 					
 					parent.startTime=System.nanoTime();
-					//System.out.println("opening t3");
 					parent.t3.start();
-					//System.out.println("t3 is on");
 					Thread.currentThread().stop();
 					
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 				}
 				else if(parent.player_level==3)
 				{
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 					parent.player_level++;
 					parent.currentLevel.setText("Level "+parent.player_level);
 					parent.runningThread++;
 					parent.startTime=System.nanoTime();
 					parent.elapsedTime=0;
-					//System.out.println("opening t4");
 					parent.t4.start();
-					//System.out.println("t4 is on");
-					
-					//System.out.println("level : "+parent.player_level+" bird : "+parent.runningThread);
 				}
 				else if(parent.player_level==4)
 				{
@@ -472,22 +415,14 @@ public class FlyMethod extends JLabel implements MouseListener
 						}
 						catch(Exception e){}
 					
-						//System.out.println(parent.runningThread);
-						
-						//parent.gamePanel.setVisible(false);
-						//parent.add(parent.completePanel);
 						parent.updateScore();
 						parent.initCompletePanel();
 						parent.gamePanel.setVisible(false);
-						//new Completed(player_level,scorelabel);
 						parent.completeGame();
 						Thread.currentThread().stop();
 					
 					}
-					//System.out.println("bird 1 stop");
 					Thread.currentThread().stop();
-					////System.out.println("stop exception");
-					//System.out.println(parent.runningThread);
 				}
 				
 			}
@@ -500,19 +435,15 @@ public class FlyMethod extends JLabel implements MouseListener
 	{
 		if(headshot)
 		{
-			//System.out.println("head shot");		
 			parent.hshot.setVisible(true);
 			scorelabel.updateScore(player_level*200);
 		}
 		else scorelabel.updateScore(player_level*100);
 		scorelabel.updateText();
-		//System.out.println("thread : "+Thread.currentThread().getId()+" dropping");
 		recentbird1=fall;
 		setIcon(fall);
-		//System.out.println("dropping");
 		for(;currentPositionY<gameHeight+100;currentPositionY+=2)
 		{
-			//System.out.println(currentPositionX+" "+j);
 			setBounds(currentPositionX,currentPositionY,200,168);
 			try{ Thread.sleep(2); }
 			catch(Exception e) { }
@@ -530,10 +461,7 @@ public class FlyMethod extends JLabel implements MouseListener
 	public void mouseExited(MouseEvent me){}
 	public void mouseClicked(MouseEvent me)
 	{
-		//System.out.println("thread : "+Thread.currentThread().getId()+" "+"clicked in x : "+me.getX()+" y : "+me.getY());
 		Sound.click.play();
-		
-		//System.out.println("current x : "+currentPositionX+" y : "+currentPositionY);
 		int x=me.getX();
 		int y=me.getY();
 		//bird1
@@ -549,6 +477,5 @@ public class FlyMethod extends JLabel implements MouseListener
 		
 	}
 	public void mousePressed(MouseEvent me){}
-	public void mouseReleased(MouseEvent me){}
-	
+	public void mouseReleased(MouseEvent me){}	
 }

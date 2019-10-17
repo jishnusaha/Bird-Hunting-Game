@@ -5,8 +5,7 @@ public class Start
 	public static void main(String args[])
 	{
 		player_interface ls=new player_interface();
-		ls.setVisible(true);
-		
+		ls.setVisible(true);	
 	}
 	
 }

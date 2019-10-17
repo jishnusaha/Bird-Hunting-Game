@@ -8,11 +8,7 @@ public class Score extends JLabel
 	int scorevalue=0;
 	public Score(String s)
 	{
-		
-		
-		setText(s);
-		
-		
+		setText(s);	
 	}
 	public void updateScore(int l)
 	{

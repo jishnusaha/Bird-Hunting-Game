@@ -33,12 +33,9 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		setResizable(false);
 		this.setBounds(0,0,WIDITH,HEIGHT);
 		
-		//initOverPanel();
-		//initCompletePanel();
 		initGamePanel();
 		initThread();
 		
-		//this.add()
 		this.add(gamePanel);
 		setVisible(true);
 		
@@ -117,8 +114,8 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		//smallbird.setBounds(1500,800,50,42);
 		//gamePanel.add(smallbird);
 		
-		pauseIcon=new ImageIcon("pause.png");
-		resumeIcon=new ImageIcon("resume.png");
+		pauseIcon=new ImageIcon("pictures/pause.png");
+		resumeIcon=new ImageIcon("pictures/resume.png");
 		pauseresume=new JLabel(pauseIcon);
 		pauseresume.setBounds(1550,200,100,100);
 		pauseresume.addMouseListener(this);
@@ -126,7 +123,7 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		
 		
 		
-		stoplabel=new JLabel(new ImageIcon("stop.png"));
+		stoplabel=new JLabel(new ImageIcon("pictures/stop.png"));
 		stoplabel.setBounds(1550,350,100,100);
 		stoplabel.addMouseListener(this);
 		stoplabel.setToolTipText("STOP");
@@ -140,7 +137,7 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		
 		
 		
-		scorebackground=new JLabel(new ImageIcon("black.png"));
+		scorebackground=new JLabel(new ImageIcon("pictures/black.png"));
 		scorebackground.setBounds(1500,0,300,900);
 		scorebackground.addMouseListener(this);
 		gamePanel.add(scorebackground);
@@ -157,11 +154,7 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		b3=new BirdFly3(player_level,scorelabel,this);
 		gamePanel.add(b3);
 		
-		//backgroundlabel=new JLabel(new ImageIcon("background.png"));
-		//backgroundlabel.setBounds(0,0,WIDITH-300,HEIGHT);
-		//backgroundlabel.setCursor(new Cursor(Cursor.MOVE_CURSOR));
-		
-		backgroundlabel=new JLabel(new ImageIcon("background.png"));
+		backgroundlabel=new JLabel(new ImageIcon("pictures/background.png"));
 		backgroundlabel.setBounds(0,0,WIDITH,HEIGHT);
 		backgroundlabel.addMouseListener(this);
 		gamePanel.add(backgroundlabel);
@@ -203,7 +196,7 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		exit.addActionListener(this);
 		completePanel.add(exit);
 		
-		backgroundlabel=new JLabel(new ImageIcon("background.png"));
+		backgroundlabel=new JLabel(new ImageIcon("pictures/background.png"));
 		backgroundlabel.setBounds(0,0,WIDITH,HEIGHT);
 		completePanel.add(backgroundlabel);
 	}
@@ -263,7 +256,6 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		overPanel=new JPanel();
 		overPanel.setLayout(null);
 		
-		//o.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		over=new JLabel("GAME OVER");
 		over.setBounds(400,200,1000,200);
 		over.setFont(new Font("Consolas",Font.BOLD,200));
@@ -295,14 +287,13 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		exit.addActionListener(this);
 		overPanel.add(exit);
 		
-		backgroundlabel=new JLabel(new ImageIcon("background.png"));
+		backgroundlabel=new JLabel(new ImageIcon("pictures/background.png"));
 		backgroundlabel.setBounds(0,0,WIDITH,HEIGHT);
 		overPanel.add(backgroundlabel);
 		
 	}
 	public void overGame()
 	{
-		//suspendThread();
 		this.gamePanel.setVisible(false);
 		System.out.println("");
 		
@@ -312,127 +303,97 @@ public class Level extends JFrame implements MouseListener,ActionListener
 	public void initThread()
 	{
 		t1=new Thread(new Runnable(){
-			//boolean running=false;
-			
 			public void run(){
 			try{
-				//running=true;
-				//runningThread=1;
 				b1_1.flyForward();
 			}
 			catch(Exception e)
 			{
-				System.out.println("t1 thread broke----------------");
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				//t1.start();
 			}
 		}});
 		
 		t2=new Thread(new Runnable(){
-			//boolean running=false;
-			
 			public void run(){
-				//running=true;
-				//runningThread=2;
 			try{
 				b1_2.flyBackward();
 			}
 			catch(Exception e)
 			{
-				System.out.println("t2 thread broke----------------");
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				//t2.start();
 			}
 		}});
 		t3=new Thread(new Runnable(){
-			//boolean running=false;
 			
 			public void run(){
-			//running=true;
-			//runningThread=2;
 			try{
 				b2.flyForward();
 			}
 			catch(Exception e)
 			{
-				System.out.println("t3 thread broke-----------------");
 				e.printStackTrace();
 				System.out.println(e.getMessage());
-				//t3.start();
 			}
 		}});
 		
 		t4=new Thread(new Runnable(){
-			//boolean running=false;
 			
 			public void run(){
-				//running=true;
-				//runningThread=3;
 			try{
 				b3.flyForward();
 			}
 			catch(Exception e)
 			{
-				System.out.println("t4 thread broke------------------------------");
 				e.printStackTrace();
-				System.out.println(e.getMessage());
-				//t4.start();
 			}
 		}});
 		
 	}
-	public void suspendThread()
+	public void suspendThread() //game play will be paused
 	{
+
+
 		elapsedTime=System.nanoTime()-startTime;
-		System.out.println("system paused");
 		if(player_level==1)
 		{
 			synchronized(this){
-			try{
-			t1.suspend();
-			System.out.println("t1 paused");
-			}
-			catch(Exception e) {}
+				try{
+					t1.suspend();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==2)
 		{
 			synchronized(this){
-			try{
-			t1.suspend();
-			System.out.println("t1 paused");
-			t2.suspend();
-			System.out.println("t2 paused");
-			}
-			catch(Exception e) {}
+				try{
+					t1.suspend();
+					t2.suspend();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==3)
 		{
 			synchronized(this){
-			try{
-			t1.suspend();
-			System.out.println("t1 paused");
-			t3.suspend();
-			System.out.println("t3 paused");
-			}
-			catch(Exception e) {}
+				try{
+					t1.suspend();
+					t3.suspend();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==4)
 		{
 			synchronized(this){
-			try{
-			t1.suspend();
-			System.out.println("t1 paused");
-			t4.suspend();
-			System.out.println("t4 paused");
-			t3.suspend();
-			System.out.println("t3 paused");
-			}
-			catch(Exception e) {}
+				try{
+					t1.suspend();
+					t4.suspend();
+					t3.suspend();
+				}
+				catch(Exception e) {}
 			}
 		}
 		
@@ -444,53 +405,44 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		b2.birdshot=false;
 		b3.birdshot=false;
 		startTime=System.nanoTime();
-		System.out.println("system resumed");
 		if(player_level==1)
 		{
 			synchronized(this){
-			try{
-			t1.resume();
-			System.out.println("t1 resumed");
-			}
-			catch(Exception e) {}
+				try{
+					t1.resume();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==2)
 		{
 			synchronized(this){
-			try{
-			t1.resume();
-			System.out.println("t1 resumed");
-			t2.resume();
-			System.out.println("t2 resumed");
-			}
-			catch(Exception e) {}
+				try{
+					t1.resume();
+					t2.resume();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==3)
 		{
 			synchronized(this){
-			try{
-			t1.resume();
-			System.out.println("t1 resumed");
-			t3.resume();
-			System.out.println("t3 resumed");
-			}
-			catch(Exception e) {}
+				try{
+					t1.resume();
+					t3.resume();
+				}
+				catch(Exception e) {}
 			}
 		}
 		else if(player_level==4)
 		{
 			synchronized(this){
-			try{
-			t1.resume();
-			System.out.println("t1 resumed");
-			t4.resume();
-			System.out.println("t4 resumed");
-			t3.resume();
-			System.out.println("t3 resumed");
-			}
-			catch(Exception e) {}
+				try{
+					t1.resume();
+					t4.resume();
+					t3.resume();
+				}
+				catch(Exception e) {}
 			}
 		}
 		
@@ -519,7 +471,6 @@ public class Level extends JFrame implements MouseListener,ActionListener
 	
 	public void mouseEntered(MouseEvent me) //mouse entered
 	{
-		//Sound.click.play();
 		if(me.getSource().equals(scorebackground)) scorebackground.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
 		else if(me.getSource().equals(pauseresume)) pauseresume.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		else if(me.getSource().equals(stoplabel)) stoplabel.setCursor(new Cursor(Cursor.HAND_CURSOR));
@@ -528,11 +479,9 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		else if(me.getSource().equals(requestbutton)) requestbutton.setCursor(new Cursor(Cursor.HAND_CURSOR));
 		
 	}
-	public void mouseExited(MouseEvent me){} //
+	public void mouseExited(MouseEvent me){} 
 	public void mouseClicked(MouseEvent me) //mouse clicked
 	{
-		//System.out.println("in level mouse clicked");
-		//Sound.click.play();
 		if(me.getSource().equals(pauseresume))
 		{
 			if(pauseresume.getIcon().equals(resumeIcon))
@@ -561,14 +510,10 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		}
 		else if(me.getSource().equals(backgroundlabel))
 		{
-			System.out.println("in level mouse clicked");
-			System.out.println("click");
 			Sound.click.play();
 		}
 		
 	}
 	public void mousePressed(MouseEvent me){}
-	public void mouseReleased(MouseEvent me){}
-	
-	
+	public void mouseReleased(MouseEvent me){}	
 }
