@@ -25,7 +25,6 @@ public class Level extends JFrame implements MouseListener,ActionListener
 	int runningThread=0;
 	public Level(int l,Score sc)
 	{
-		System.out.println("level called for "+l);
 		scorelabel=sc;
 		player_level=l;
 		c=getContentPane();
@@ -167,7 +166,7 @@ public class Level extends JFrame implements MouseListener,ActionListener
 		completePanel=new JPanel();
 		completePanel.setLayout(null);
 		
-		completelavel=new JLabel("LEVEL ACOMPLISHED");
+		completelavel=new JLabel("LEVEL ACCOMPLISHED");
 		completelavel.setBounds(90,200,1700,200);
 		completelavel.setFont(new Font("Consolas",Font.BOLD,170));
 		completePanel.add(completelavel);
